@@ -71,7 +71,6 @@ void Tricublin_zyx1_n(float *d, float *f1, pxpypz *pxyz,  ztab *lv, int n){
   int ixyz;          // unilinear index into array f1 (collapsed dimensions)
   int zlinear;       // non zero if linear interpolation
                      // all above computed in Vcoef_pxyz4, used in Tricublin_zyxf1
-/*printf*/("%12.7f %12.7f %12.7f\n",pxyz->px, pxyz->py, pxyz->pz);
   while(n--){
     zlinear = Vcoef_pxyz4_inline(cxyz, &ixyz, pxyz->px, pxyz->py, pxyz->pz, lv);  // compute coefficients
     Tricublin_zyxf1_inline(d, f1 + ixyz, cxyz, lv->ni, lv->nij, zlinear);         // interpolate
