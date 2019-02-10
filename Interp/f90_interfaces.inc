@@ -1,3 +1,6 @@
+#if defined(USE_FLOAT)
+#define C_DOUBLE C_FLOAT
+#endif
   interface
     function vsearch_setup(levels, nk, ni, nj) result (ztab) bind(C,name='Vsearch_setup')
       import :: C_PTR, C_DOUBLE, C_INT

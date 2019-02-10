@@ -14,6 +14,9 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+#if defined(USE_FLOAT)
+#define double float
+#endif
 
 typedef struct{
   float px;    // position along x in index space

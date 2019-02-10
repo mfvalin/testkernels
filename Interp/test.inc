@@ -1,3 +1,8 @@
+#if defined(USE_FLOAT)
+#define PRECISION 4
+#else
+#define PRECISION 8
+#endif
   interface
     function nanocycles() result (nano) bind(C,name='Nanocycles')
     import :: C_LONG_LONG
@@ -10,23 +15,23 @@
   integer, parameter :: NR = 10
   integer :: my_proc = 0
   integer*8 :: t0, t1
-  real*8 :: dx, dy, dz
-  real*8, dimension(8) :: px, py, pz
-  real*8, dimension(8) :: pxy
-  real*8, dimension(2) :: xy
+  real (kind = PRECISION) :: dx, dy, dz
+  real (kind = PRECISION), dimension(8) :: px, py, pz
+  real (kind = PRECISION), dimension(8) :: pxy
+  real (kind = PRECISION), dimension(2) :: xy
   real, dimension(-2:NI+3,-1:NJ+2,NK), target :: f1, f2, f3
   real, dimension(3,-2:NI+3,-1:NJ+2,NK), target :: f123
-  real*8, dimension(NK) :: zlev
+  real (kind = PRECISION), dimension(NK) :: zlev
   integer :: i, j, k, ii, jj, kk, rr
-  real*8 fx, fy, fz, fxyz, x, y, z, ovni, ovnj, ovnk, xx, yy, zz
+  real (kind = PRECISION) fx, fy, fz, fxyz, x, y, z, ovni, ovnj, ovnk, xx, yy, zz
   real*4, dimension(3) :: r1, r2, r3, e
   type(C_PTR) :: lv
   real, dimension(3,NI,NJ,NK) :: pxpypz
   real, dimension(NI,NJ,NK) :: expected, d, dmin, dmax, dlin
   real, dimension(3,NI,NJ,NK) :: d3
-  real*8, dimension(NK) :: levels
+  real (kind = PRECISION), dimension(NK) :: levels
   real :: delta, error, delta1, delta2, delta3
-  real*8 :: avg, avg1, avg2, avg3
+  real (kind = PRECISION) :: avg, avg1, avg2, avg3
   integer :: exact, minmaxerr, ierr
 
   fx(x) = (x+1.0)*(x+1.1)*(x+1.2)*(x+1.3)

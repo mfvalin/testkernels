@@ -17,7 +17,7 @@
 program test
   use ISO_C_BINDING
   implicit none
-  include "f90_interfaces.inc"
+#include "f90_interfaces.inc"
 #if defined(USE_MPI)
   include "mpif.h"
 #endif
