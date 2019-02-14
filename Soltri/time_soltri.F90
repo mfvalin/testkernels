@@ -4,7 +4,11 @@ program tsoltri
 
   integer, parameter :: NP = 2000
   integer, parameter :: NI = 1000
+#if defined(R8)
+  real*8, dimension(NP,NI) :: A, B, C, R, RHS
+#else
   real, dimension(NP,NI) :: A, B, C, R, RHS
+#endif
   integer :: irep, ierr, rank, csiz, i
   real*8, dimension(:), pointer :: ttmp
   real*8 :: t0, t1, ttot
@@ -13,6 +17,7 @@ program tsoltri
   B = .90
   c = .80
   RHS = 1.5
+  R = 0
 
   call mpi_init(ierr)
   call mpi_comm_rank(MPI_COMM_WORLD,rank,ierr)
@@ -23,7 +28,11 @@ program tsoltri
     call mpi_barrier(MPI_COMM_WORLD,ierr)
     t0 = MPI_wtime()
     do i = 1, 100
+#if defined(R8)
+      call soltri_m8 ( r, rhs, a, b, c, np, ni)
+#else
       call soltri_m ( r, rhs, a, b, c, np, ni)
+#endif
     enddo
     t1 = MPI_wtime() - t0
     call mpi_barrier(MPI_COMM_WORLD,ierr)
