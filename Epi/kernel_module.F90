@@ -21,7 +21,7 @@
     real, dimension(l_minx:l_maxx, l_miny:l_maxy, l_nk, nvars) :: prod
     real, dimension(l_minx:l_maxx, l_miny:l_maxy, l_nk, nvars, nphi) :: u
     real, dimension(l_minx:l_maxx, l_miny:l_maxy, l_nk) :: v_vec_on_u, u_vec_on_v
-    real*8, dimension(nphi-1) :: V_aug
+    real*8, dimension(nphi) :: V_aug
     real*8, dimension(l_ni) :: sum1,sum2,sum3
     real*8, dimension(:,:,:,:), allocatable :: stencil_eq1_h, stencil_eq1_u, stencil_eq1_v
     real*8, dimension(:,:,:,:), allocatable :: stencil_eq2_h, stencil_eq2_u
@@ -45,32 +45,32 @@
 
       allocate ( stencil_adv_tr(l_minx:l_maxx, UPWIND_SHAPE, l_miny:l_maxy, l_nk) )
 
-      stencil_eq1_h = 0.0
-      stencil_eq1_u = 0.0
-      stencil_eq1_v = 0.0
+      stencil_eq1_h = 1.1
+      stencil_eq1_u = 1.2
+      stencil_eq1_v = 1.3
 
-      stencil_eq2_h        = 0.0
-      stencil_eq2_u        = 0.0
-      stencil_eq2_v_interp = 0.0
+      stencil_eq2_h        = 1.4
+      stencil_eq2_u        = 1.4
+      stencil_eq2_v_interp = 1.6
 
-      stencil_eq3_h        = 0.0
-      stencil_eq3_u_interp = 0.0
-      stencil_eq3_v        = 0.0
+      stencil_eq3_h        = 1.7
+      stencil_eq3_u_interp = 1.8
+      stencil_eq3_v        = 1.9
 
-      stencil_adv_tr       = 0.0
+      stencil_adv_tr       = 1.0
 
       sum1 = 0
       sum2 = 0
       sum3 = 0
-      V_aug = 0
-      vec = 0
-      vis = 0
+      V_aug = 1.35
+      vec = 1.234
+      vis = 2.345
       prod = 0
       u = 0
-      fx = 0
-      fy = 0
-      v_vec_on_u = 0
-      u_vec_on_v = 0
+      fx = 1.34
+      fy = 1.12
+      v_vec_on_u = 1.45
+      u_vec_on_v = 1.56
     end subroutine initialize
      
    end module kmv2
