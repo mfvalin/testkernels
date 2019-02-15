@@ -11,7 +11,7 @@ program test_kernel_matvec2
 ! call kernel_matvec2 (nu   , dt   , i0, in  , j0, jn  , ns)
   t0 = MPI_wtime()
   call mpi_barrier(MPI_COMM_WORLD,ier)
-  do irep = 1, 5
+  do irep = 1, 1
     call kernel_matvec2 (1.0_8, 2.0_8, 1 , l_ni, 1 , l_nj, 3 )
   enddo
   call mpi_barrier(MPI_COMM_WORLD,ier)
