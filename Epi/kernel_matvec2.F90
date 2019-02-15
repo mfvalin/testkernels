@@ -81,7 +81,7 @@
       end do
 
       do j = j0, jn
-         fyy = fy(j)
+      fyy = fy(j)
          do i = i0, in
             prod(i,j,k,3) = prod(i,j,k,3) &
               + stencil_eq3_v(i,P  ,j,k)      * vec(i  ,j,k,3) &
@@ -126,9 +126,8 @@
 100   continue
 
    do v = 4,nvars
-!       print *,'v =',v
       do k = 1,l_nk
-	do slc= 1, ns
+	do slc= 1, 1 !ns
 	  do j = j0, jn
 	      do i = i0, in
 		!****************************************

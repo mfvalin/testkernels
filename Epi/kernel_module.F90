@@ -2,15 +2,15 @@
      integer, parameter :: P=1, WWW=2, WW=3, W=4, E=5, EE=6, EEE=7, SSS=8, SS=9, S=10, N=11, NN=12, NNN=13, UPWIND_SHAPE=13
      integer, parameter :: www_stag=1, ww_stag=2, w_stag=3, e_stag=4, eee_stag=5, ee_stag=6, sss_stag=7, &
                            ss_stag=8, s_stag=9, n_stag=10, nn_stag=11, nnn_stag=12, CENTERED_SHAPE=12
-     integer, parameter :: halox = 2
-     integer, parameter :: haloy = 2
+     integer, parameter :: halox = 4
+     integer, parameter :: haloy = 4
      integer, parameter :: l_ni = 200
      integer, parameter :: l_nj = 150
-     integer, parameter :: l_nk = 100
+     integer, parameter :: l_nk = 80
      integer, parameter :: l_minx = 1 - halox
-     integer, parameter :: l_maxx = l_ni - halox
+     integer, parameter :: l_maxx = l_ni + halox
      integer, parameter :: l_miny = 1 - haloy
-     integer, parameter :: l_maxy = l_nj - haloy
+     integer, parameter :: l_maxy = l_nj + haloy
      integer, parameter :: nvars = 9
      integer, parameter :: nphi = 2
      save
@@ -68,7 +68,7 @@
       prod = 0
       u = 0
       fx = 1.34
-      fy = 1.12
+      fy = 1.45
       v_vec_on_u = 1.45
       u_vec_on_v = 1.56
     end subroutine initialize
