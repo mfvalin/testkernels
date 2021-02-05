@@ -37,6 +37,8 @@
           character(C_CHAR), dimension(nchar), intent(OUT) :: name
         end function f_gethostname
       end interface
+#else
+      integer :: err, my_proc, pe0, total_procs
 #endif
       real  R8DIM
       real t0
@@ -59,6 +61,7 @@
 
       my_proc=0
       total_procs=1
+      pe0 = 0
 #ifdef MPI
       call mpi_init(err)
       call mpi_comm_rank(MPI_COMM_WORLD,pe0,err)
@@ -71,10 +74,10 @@
         if(hostname(i) == achar(0)) exit
         host_128(i:i) = hostname(i)
       enddo
-      allocate(hosts_8(total0))
-      call MPI_gather(host_128(1:8), 8, MPI_CHAR, 
-     %                hosts_8      , 8, MPI_CHAR, 
-     %                0, MPI_COMM_WORLD, err)
+!     allocate(hosts_8(total0))
+!     call MPI_gather(host_128(1:8), 8, MPI_CHAR, 
+!    %                hosts_8      , 8, MPI_CHAR, 
+!    %                0, MPI_COMM_WORLD, err)
       host_id = abs(host_id)
       call MPI_COMM_SPLIT(MPI_COMM_WORLD, host_id, pe0, 
      %                    OWN_COMM_WORLD, err)
@@ -302,6 +305,7 @@
 	print *,'node time(sec) =',T2-T1,', ',
      %          'node minimum(ms) =',minval(NTIMES(1:nsteps:2,:)),
      %                               minval(NTIMES(2:nsteps:2,:))
+
 	tmin = minval(ALLTIMES(1:nsteps:2,:))
 	do j = 1, total_procs
 	  do i = 1, nsteps, 2
@@ -328,7 +332,7 @@
 	close(unit=11)
       endif
 11    format(1000I3)
-!       goto 999
+      goto 999
       if (pe0 == 0) then
       print *,'global min(ms) =',minval(ALLTIMES(1:nsteps:2,:)),','
      %                          ,minval(ALLTIMES(2:nsteps:2,:))
